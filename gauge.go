@@ -66,6 +66,7 @@ func (g *Gauge) Buffer() []Point {
 		p.Y = midy
 		p.Ch = v
 		p.Bg = g.Block.BgColor
+		p.Fg = g.PercentColor
 		block = append(block, p)
 	}
 
@@ -76,6 +77,7 @@ func (g *Gauge) Buffer() []Point {
 		p.Y = midy
 		p.Ch = v
 		p.Bg = g.Block.BgColor
+		p.Fg = g.PercentColor
 		block = append(block, p)
 	}
 
