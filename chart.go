@@ -4,7 +4,10 @@
 
 package termui
 
-import "fmt"
+import (
+	"fmt"
+	"math"
+)
 
 // only 16 possible combinations, why bother
 var braillePatterns = map[[2]int]rune{
@@ -77,6 +80,8 @@ func NewLineChart() *LineChart {
 	lc.DotStyle = '•'
 	lc.axisXLebelGap = 2
 	lc.axisYLebelGap = 1
+	lc.bottomValue = math.Inf(1)
+	lc.topValue = math.Inf(-1)
 	return lc
 }
 
@@ -327,5 +332,5 @@ func (lc *LineChart) Buffer() []Point {
 		ps = append(ps, lc.renderBraille()...)
 	}
 
-	return ps
+	return lc.Block.chopOverflow(ps)
 }

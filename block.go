@@ -68,6 +68,13 @@ func (d *Block) align() {
 
 }
 
+// InnerBounds returns the internal bounds of the block after aligning and
+// calculating the padding and border, if any.
+func (d *Block) InnerBounds() (x, y, width, height int) {
+	d.align()
+	return d.innerX, d.innerY, d.innerWidth, d.innerHeight
+}
+
 // Buffer implements Bufferer interface.
 // Draw background and border (if any).
 func (d *Block) Buffer() []Point {
@@ -114,4 +121,22 @@ func (d *Block) SetY(y int) {
 // SetWidth implements GridBuffer interface, it sets block's width.
 func (d *Block) SetWidth(w int) {
 	d.Width = w
+}
+
+// chop the overflow parts
+func (d *Block) chopOverflow(ps []Point) []Point {
+	nps := make([]Point, 0, len(ps))
+	x := d.X
+	y := d.Y
+	w := d.Width
+	h := d.Height
+	for _, v := range ps {
+		if v.X >= x &&
+			v.X < x+w &&
+			v.Y >= y &&
+			v.Y < y+h {
+			nps = append(nps, v)
+		}
+	}
+	return nps
 }

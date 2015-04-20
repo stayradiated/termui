@@ -114,5 +114,6 @@ func (g *Gauge) Buffer() []Point {
 		}
 		block = append(block, p)
 	}
+
 	return block
 }
