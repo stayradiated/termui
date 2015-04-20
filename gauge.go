@@ -25,9 +25,8 @@ type Gauge struct {
 
 	LeftMargin  int
 	RightMargin int
-
-	LeftText  string
-	RightText string
+	LeftText    string
+	RightText   string
 }
 
 // NewGauge return a new gauge with current theme.
@@ -37,10 +36,8 @@ func NewGauge() *Gauge {
 		PercentColor: theme.GaugePercent,
 		BarColor:     theme.GaugeBar,
 	}
-
 	g.Width = 12
 	g.Height = 5
-
 	return g
 }
 
@@ -108,12 +105,11 @@ func (g *Gauge) Buffer() []Point {
 			if p.Bg == ColorDefault {
 				p.Bg |= AttrReverse
 			}
-
 		} else {
 			p.Bg = g.Block.BgColor
 		}
 		block = append(block, p)
 	}
 
-	return block
+	return g.Block.chopOverflow(block)
 }
