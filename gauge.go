@@ -17,16 +17,26 @@ import "strconv"
   g.BarColor = termui.ColorRed
   g.PercentColor = termui.ColorBlue
 */
+
+// Align is the position of the gauge's label.
+type Align int
+
+// All supported positions.
+const (
+	AlignLeft Align = iota
+	AlignCenter
+	AlignRight
+)
+
 type Gauge struct {
 	Block
 	Percent      int
 	BarColor     Attribute
 	PercentColor Attribute
-
-	LeftMargin  int
-	RightMargin int
-	LeftText    string
-	RightText   string
+	LeftMargin   int
+	RightMargin  int
+	LeftText     string
+	RightText    string
 }
 
 // NewGauge return a new gauge with current theme.
